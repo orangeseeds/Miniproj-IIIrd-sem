@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script>
+
+// JavaScript program to create a
+// tree with left child
+// right sibling representation.
+
+    class Node
+    {
+    // Creating new Node
+        constructor(data)
+        {
+            this.data=data;
+            this.next = this.child = null;
+        }
+    }
+
+// Adds a sibling to a list with starting with n
+function addSibling(n,data)
+{
+    if (n == null)
+      return null;
+    while (n.next != null)
+      n = n.next;
+    return (n.next = new Node(data));
+}
+
+// Add child Node to a Node
+function addChild(n,data)
+{
+    if (n == null)
+      return null;
+
+    // Check if child list is not empty.
+    if (n.child != null)
+      return addSibling(n.child, data);
+    else
+      return (n.child = new Node(data));
+}
+
+// Traverses tree in level order
+function traverseTree(root)
+{
+    // Corner cases
+    if (root == null)
+      return;
+    document.write(root.data+ " ");
+    if (root.child == null)
+      return;
+
+    // Create a queue and enque root
+    let q = [];
+    let curr = root.child;
+    q.push(curr);
+
+    while (q.length!=0)
+    {
+
+      // Take out an item from the queue
+      curr = q[0];
+      q.shift();
+
+      // Print next level of taken out item and enque
+      // next level's children
+      while (curr != null)
+      {
+        document.write(curr.data + " ");
+        if (curr.child != null)
+        {
+          q.push(curr.child);
+        }
+        curr = curr.next;
+      }
+    }
+}
+
+function parentNode(mainroot, node){
+  if(root == null)
+      return;
+  while(root != null)
+  {
+      if (root.child == node) {
+        console.log(root);
+        return;
+      }
+      // console.log(root);
+      if(root.child != null)
+          parentNode(mainroot, root.child);
+      root = root.next;
+  }
+}
+
+// Driver code
+let root = new Node(10);
+let n1 = addChild(root, 2);
+let n2 = addChild(root, 3);
+let n3 = addChild(root, 4);
+let n4 = addChild(n3, 6);
+let n5 = addChild(root, 5);
+let n6 = addChild(n5, 7);
+let n7 = addChild(n5, 8);
+let n8 = addChild(n5, 9);
+
+traverseTree(root);
+parentNode(root, n8);
+
+
+// This code is contributed by unknown2108
+
+</script>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mini Project COMP-206</title>
+
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+
+      <h2>Building Tree Using Left Child Right Sibling Representation</h2>
+
+      <div class="container">
+
+        <div class="first-section">
+
+        <div class="canvas-section" style="margin-right:10%;">
+          <h4>Sketch Board</h4>
+          <p class="content-text">
+            Undo: <kbd>Ctrl</kbd> + <kbd>Z</kbd>
+            <br>
+            Jump To child branch 1 or 2 or ... : <kbd>Alt</kbd> + <kbd>1</kbd> or <kbd>Alt</kbd> + <kbd>2</kbd> or ....
+          </p>
+          <canvas id="canvas"></canvas>
+          <br>
+          <button type="button" name="button" onclick="clearStrokes()">
+            Clear
+          </button>
+          <button type="button" name="button" onclick="pointToCurrentNode()">
+            Clear
+          </button>
+          <input type="number" id="maxDegree" value="5" style="margin-left:90px;">
+          <button type="button" onclick="setMaxDegree()">Set Max Degree</button>
+        </div>
+        <!-- <button type="button" name="button" onclick="undo()">
+          Undo
+        </button>
+        <button type="button" name="button" onclick="redo()">
+          Redo
+        </button> -->
+
+        <div class="canvas-section">
+          <h4 style="margin-bottom:95px;">Left Child Right Sibling Representation</h4>
+          <canvas id="canvas2"></canvas>
+        </div>
+      </div>
+      <div class="content-text"  style="display:flex;">
+        <p>
+          Default maximum degree is set to 5.
+          Let's say we are at <i>Node 1</i> and there are 4 possible children
+          <i>Node 4</i>,
+          <i>Node 5</i>,
+          <i>Node 6</i>,
+          <i>Node 7</i>
+          each of these nodes would need a certain number combination
+          <br>
+          with <kbd>Alt</kbd> to jump to.
+        </p>
+        <!-- <img src="assets/example.png" alt="" style="border-radius:6px;"> -->
+      </div>
+      <div class="content-text">
+        <kbd>Alt</kbd> + <kbd>1</kbd> would take you to <i>Node 4</i>.
+        <br>
+        <kbd>Alt</kbd> + <kbd>2</kbd> would take you to <i>Node 5</i>.
+        <br>
+        <kbd>Alt</kbd> + <kbd>3</kbd> would take you to <i>Node 6</i>.
+        <br>
+        <kbd>Alt</kbd> + <kbd>4</kbd> would take you to <i>Node 7</i>.
+      </div>
+      <p class="content-text">
+        And if there is only one child, then <kbd>Alt</kbd> + <kbd>1</kbd> will act as redo.
+      </p>
+
+      <div class="info-section">
+        <h4>About the Project</h4>
+        <p class="content-text">
+          Each individual stroke made by the user in the canvas is recorded and that specific stroke's data is turned into a node and added to the tree. As the user makes each new stroke the visual representation of the left-child right-sibling tree updates in real time and shows the structure of the tree being formed.
+        </p>
+        <p class="content-text">
+          The user also has access to undo and redo functions which are mapped to specific key combinations. Unlike conventional undo-redo which is implemented using stack, this project has implemented the functionality using a Tree Structure.
+        </p>
+      </div>
+
+    <div class="info-section">
+      <h4>Data of the entire Tree converted into Json</h4>
+      <p class="content-text">
+        Convert the above created image into JSON data which can be used to generate the same images drawn in the sketch section above.
+      </p>
+
+      <button type="button" onclick="fillTextarea()">
+        Generate JSON
+      </button>
+      <br>
+
+      <textarea name="name" rows="10" cols="75" id="jsonText" placeholder="Generate Your JSON here..."></textarea>
+
+    </div>
+
+    <div class="info-section">
+      <h4>Data of the entire Tree converted into Json</h4>
+
+      <p class="content-text">
+        You can paste the JSON data from the above textarea here and generate image soley from the JSON tree provided.
+      </p>
+
+      <p class="content-text">
+        Currently this feature takes the JSON data provided and finds all the leaf nodes in the data and
+        selects on of the leaf nodes and generates the path from root to the selected leaf node, which contains series of strokes which are drawn on the canvas thus generating the image.
+        <i>Currently a random leaf node is selected</i>
+      </p>
+
+      <button type="button" onclick="jsonToImage()">
+        Generate Image
+      </button>
+      <br>
+
+      <textarea name="name" rows="10" cols="75" id="referenceJson" placeholder="Paste Your JSON here..."></textarea>
+
+    </div>
+
+    <div class="canvas-section" style="margin-top:20px;">
+      <h4>Generated Board</h4>
+      <canvas id="canvas3"></canvas>
+    </div>
+  </div>
+
+  <div class="banner-bottom">
+  </div>
+  <div class="banner-top" id="notifier">
+  </div>
+
+  </body>
+  <script src="https://unpkg.com/flatted@3.2.2/min.js">
+  </script>
+  <script src="main.js"></script>
+</html>
